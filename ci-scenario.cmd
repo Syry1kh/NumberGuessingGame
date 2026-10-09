@@ -26,6 +26,9 @@ call build-exe.bat nopause > out.txt 2>&1
 set RC=%errorlevel%
 type out.txt
 echo build exit code: %RC%
+echo ::notice title=%SCN%-exitcode::build exit code %RC%
+for /f "delims=" %%L in ('findstr /r /c:"Using JDK" /c:"ERROR:" out.txt') do echo ::notice title=%SCN%-log::%%L
+if exist dist\NumberGuess\NumberGuess.exe echo ::notice title=%SCN%-exe::NumberGuess.exe exists
 if "%SCN%"=="reject_old_jdk" goto :check_reject
 if not "%RC%"=="0" (echo FAIL: build failed & exit /b 1)
 if not exist dist\NumberGuess\NumberGuess.exe (echo FAIL: no exe & exit /b 1)
