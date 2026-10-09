@@ -1,0 +1,20 @@
+name: tmp-test-find-jdk
+on:
+  push:
+    branches: [tmp-ci-test]
+jobs:
+  scenario:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [java_home, jdks_folder, reject_old_jdk]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Scenario ${{ matrix.scenario }}
+        shell: cmd
+        run: call ci-scenario.cmd ${{ matrix.scenario }}
