@@ -1,0 +1,29 @@
+name: Build Windows exe
+
+# Собирает NumberGuess.exe (с встроенной Java) на Windows-сервере GitHub.
+# Результат: Actions -> нужный запуск -> Artifacts -> NumberGuess-windows.
+on:
+  push:
+    branches: [main, gui-version]
+  workflow_dispatch:
+
+jobs:
+  windows-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build NumberGuess.exe
+        shell: cmd
+        run: call build-exe.bat nopause
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NumberGuess-windows
+          path: dist/NumberGuess
+          if-no-files-found: error
