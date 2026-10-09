@@ -33,8 +33,9 @@ java -jar target/NumberGuessing.jar
 
 ### Windows .exe (Java на компьютере не нужна)
 
-Двойной клик по `build-exe.bat` (нужен JDK 21 или новее в `PATH`) — получится
-`dist\NumberGuess\NumberGuess.exe`. Внутри папки лежит встроенная Java, поэтому
+Двойной клик по `build-exe.bat` (нужен JDK 21 или новее; скрипт сам ищет его в `PATH`,
+`JAVA_HOME` и обычных папках, в том числе в `%USERPROFILE%\.jdks`, куда JDK ставит IntelliJ IDEA) —
+получится `dist\NumberGuess\NumberGuess.exe`. Внутри папки лежит встроенная Java, поэтому
 игра запускается и на компьютерах, где Java не установлена. Папку `NumberGuess`
 нужно хранить целиком: одному `.exe` нужны файлы рядом с ним.
 
